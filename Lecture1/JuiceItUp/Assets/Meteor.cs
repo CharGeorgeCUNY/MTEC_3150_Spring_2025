@@ -9,6 +9,8 @@ public class Meteor : iDamageable
     [SerializeField]
     private float DeathTime = 6f;
     public float InitialForce=100f;
+    public AudioClip Audio;
+
     void Start()
     {
         StartTime = Time.realtimeSinceStartup;
@@ -41,6 +43,7 @@ public class Meteor : iDamageable
 
     public void onDestroyDamage()
     {
+        AudioSource.PlayClipAtPoint(Audio,Vector3.zero);
         Destroy(this.gameObject);
     }
     public void onDestroyTime()
