@@ -23,7 +23,7 @@ public class Enemies : MonoBehaviour
 
         // assigns the bool of the health function 
         // when the game object called "Enemy" collides
-        bool IsHealth = (collision.gameObject.name == "Enemy");
+        bool IsHealth = (collision.gameObject.name == "Player");
         GameObject.FindObjectOfType<GameManager>().IncrementHealth(IsHealth);
     }
 }
