@@ -545,7 +545,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ae0a4b35b5e404f878beed9a2035e8, type: 3}
---- !u!1001 &3014670982302606828
+--- !u!1001 &2006228051
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -559,27 +559,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1606598829134625003, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_Size.x
-      value: 0.16
+      value: 10.24
       objectReference: {fileID: 0}
     - target: {fileID: 1606598829134625003, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_Size.y
-      value: 0.16
+      value: 10.24
       objectReference: {fileID: 0}
     - target: {fileID: 1606598829134625003, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1606598829134625003, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3999186638330419273, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.01
+      value: 7.372211
       objectReference: {fileID: 0}
     - target: {fileID: 3999186638330419273, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11
+      value: -0.2672267
       objectReference: {fileID: 0}
     - target: {fileID: 3999186638330419273, guid: 6b2b27f6c67e1cf46a53696187a31561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -623,8 +623,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 987412775}
+  - {fileID: 2006228051}
   - {fileID: 232886822}
-  - {fileID: 3014670982302606828}
   - {fileID: 436964974}
   - {fileID: 577642936}
   - {fileID: 1776308079}
