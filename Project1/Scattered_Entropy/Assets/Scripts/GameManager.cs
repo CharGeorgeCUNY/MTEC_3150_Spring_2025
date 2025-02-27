@@ -9,7 +9,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI HealthText;
+    public TextMeshProUGUI DialogueText;
+    // public string 
     public int MaxHealth;
+    public string MerchantDialogue;
 
     public int PlayerDeath = 0;
     // Start is called before the first frame update
@@ -46,5 +49,18 @@ public class GameManager : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public string ShowDialogue(bool IsDialogue) {
+        if (IsDialogue) {
+            MerchantDialogue = "Welcome to this game";
+            string Dialogue = "";
+
+            Dialogue += (MerchantDialogue);
+            DialogueText.SetText(Dialogue);
+            
+        }
+
+        return "";
     }
 }
