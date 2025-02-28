@@ -8,9 +8,11 @@ public class Walker : MonoBehaviour
     public float speed = 3.0f;
     public Vector2 Veloctiy;
     public Rigidbody2D rigidBody2D;
+    Animator ani;
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,11 @@ public class Walker : MonoBehaviour
         Veloctiy.Normalize();
         Veloctiy *= speed;
         rigidBody2D.velocity   = Veloctiy;
+        ani.SetFloat("Horz", Veloctiy.x);
+        
+        ani.SetFloat("Vert", Veloctiy.y);
+
+
         
     }
 }
