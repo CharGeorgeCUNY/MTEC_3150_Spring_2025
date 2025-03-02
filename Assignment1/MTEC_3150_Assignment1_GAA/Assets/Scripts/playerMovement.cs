@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
 
-    /* Unlike, p5.js, these are mae irrelevent by the GUI
+    /* Unlike, p5.js, these are made irrelevent by the GUI
     private bool isRunning;
     private bool isJumping;
     */
@@ -63,6 +64,13 @@ public class playerMovement : MonoBehaviour
         // Is the input 0? No? Then start runnin'! Is the player touching the ground? Get ready to jump!
         animation.SetBool("run", horizontalInput != 0);
         animation.SetBool("touchGround", grounded == true);
+
+
+        if (transform.position.y < -20f)
+        {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name); // Restarts the level!!
+
+        }
     }
 
 
@@ -78,6 +86,11 @@ public class playerMovement : MonoBehaviour
         if(collision.gameObject.tag == "Platform")
         {
             grounded = true;
+        }
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name); // Restarts the level!!
         }
     }
 }
