@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     Rigidbody2D rb;
-    Vector2 movement;
+    [HideInInspector] public Vector2 movement;
     Vector2 lastMovement;
-    Direction currentDirection = Direction.Down;
+    [HideInInspector] public Direction currentDirection = Direction.Down;
     Animator animator;
 
     bool facingLeft = true;
@@ -38,35 +38,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-
-        if (movement != Vector2.zero)
-        {
-            switch (currentDirection)
-            {
-                case Direction.Up:
-                    break;
-                case Direction.Down:
-                    break;
-                case Direction.Left:
-                    break;
-                case Direction.Right:
-                    break;
-            }
-        }
-        else
-        {
-            switch (currentDirection)
-            {
-                case Direction.Up:
-                    break;
-                case Direction.Down:
-                    break;
-                case Direction.Left:
-                    break;
-                case Direction.Right:
-                    break;
-            }
-        }
     }
 
     void ProcessInputs()

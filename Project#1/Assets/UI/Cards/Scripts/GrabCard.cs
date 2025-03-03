@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class GrabCard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // Reference to the Card script/data you'd like to add to the player's hand
+    public Card cardData;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Card picked up by the player!");
+
+            // 1) Find or reference your GameManager (or any script that handles the player's cards)
+            GameManager gm = FindObjectOfType<GameManager>();
+
+            // 2) Add this card's data to the player's hand
+            gm.AddCard(cardData);
+
+            // 3) Destroy the pickup object
             Destroy(gameObject);
         }
     }

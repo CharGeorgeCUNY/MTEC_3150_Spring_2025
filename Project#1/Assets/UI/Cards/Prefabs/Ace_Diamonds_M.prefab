@@ -157,6 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suit: 1
-  rank: 1
+  rank: 14
   miniCardSprite: {fileID: -883966234, guid: 9ba951d09f4311c48a3075dd9419388d, type: 3}
   cardSprite: {fileID: -1536284035, guid: 9c2dd3d1589ded6409bdd819b915ac15, type: 3}
