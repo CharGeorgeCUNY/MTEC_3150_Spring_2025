@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class MapController : MonoBehaviour
 {
@@ -12,15 +13,12 @@ public class MapController : MonoBehaviour
     PlayerMovement pm;
     public GameObject currentChunk;
 
-
     [Header("Optimization")]
     public List<GameObject> spawnedChunks;
     GameObject latestChunk;
     public float maxOpDist;
     float opDist;
     float optimizerCooldown;
-    float optimizerCooldownDur;
-
 
     void Start()
     {
@@ -35,13 +33,10 @@ public class MapController : MonoBehaviour
 
     void ChunkChecker()
     {
-        if (!currentChunk)
-        {
-            return;
-        }
+        if (!currentChunk) return;
 
-
-        if (pm.movement.x > 0 && pm.movement.y == 0) // right
+        // Right
+        if (pm.movement.x > 0 && pm.movement.y == 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("Right").position, checkerRadius, terrainMask))
             {
@@ -49,17 +44,17 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x < 0 && pm.movement.y == 0) // left
+        // Left
+        else if (pm.movement.x < 0 && pm.movement.y == 0)
         {
-            if (!Physics2D.OverlapCircle(currentChunk.transform.Find("Left").position + new Vector3(-20, 0, 0), checkerRadius, terrainMask))
+            if (!Physics2D.OverlapCircle(currentChunk.transform.Find("Left").position, checkerRadius, terrainMask))
             {
                 noTerrainPosition = currentChunk.transform.Find("Left").position;
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x == 0 && pm.movement.y > 0) // up
+        // Up
+        else if (pm.movement.x == 0 && pm.movement.y > 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("Up").position, checkerRadius, terrainMask))
             {
@@ -67,8 +62,8 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x == 0 && pm.movement.y < 0) // down
+        // Down
+        else if (pm.movement.x == 0 && pm.movement.y < 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("Down").position, checkerRadius, terrainMask))
             {
@@ -76,8 +71,8 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x > 0 && pm.movement.y > 0) // right up
+        // Right Up
+        else if (pm.movement.x > 0 && pm.movement.y > 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("RightUp").position, checkerRadius, terrainMask))
             {
@@ -85,8 +80,8 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x > 0 && pm.movement.y < 0) // right down
+        // Right Down
+        else if (pm.movement.x > 0 && pm.movement.y < 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("RightDown").position, checkerRadius, terrainMask))
             {
@@ -94,8 +89,8 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x < 0 && pm.movement.y > 0) // left up
+        // Left Up
+        else if (pm.movement.x < 0 && pm.movement.y > 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("LeftUp").position, checkerRadius, terrainMask))
             {
@@ -103,8 +98,8 @@ public class MapController : MonoBehaviour
                 SpawnChunk();
             }
         }
-
-        else if (pm.movement.x < 0 && pm.movement.y < 0) // left down
+        // Left Down
+        else if (pm.movement.x < 0 && pm.movement.y < 0)
         {
             if (!Physics2D.OverlapCircle(currentChunk.transform.Find("LeftDown").position, checkerRadius, terrainMask))
             {
@@ -125,9 +120,7 @@ public class MapController : MonoBehaviour
     {
         optimizerCooldown -= Time.deltaTime;
 
-        if (optimizerCooldown <= 0f) { optimizerCooldown = optimizerCooldownDur; }
-        else { return; }
-        foreach (GameObject chunk in spawnedChunks) 
+        foreach (GameObject chunk in spawnedChunks)
         {
             opDist = Vector3.Distance(player.transform.position, chunk.transform.position);
             if (opDist > maxOpDist) { chunk.SetActive(false); }

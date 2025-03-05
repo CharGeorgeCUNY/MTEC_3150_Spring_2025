@@ -12,18 +12,19 @@ public enum Direction
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
     Rigidbody2D rb;
     [HideInInspector] public Vector2 movement;
-    Vector2 lastMovement;
+    [HideInInspector] public Vector2 lastMovement;
     [HideInInspector] public Direction currentDirection = Direction.Down;
     Animator animator;
 
     bool facingLeft = true;
+    public CharacterScriptableObject characterData;
 
 
     void Start()
     {
+        if (lastMovement == null) lastMovement = Vector2.right;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * characterData.MoveSpeed * Time.fixedDeltaTime);
     }
 
     void ProcessInputs()

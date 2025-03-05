@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1294634295823978780}
   - component: {fileID: 1702888431218560749}
   - component: {fileID: 2919149009518750259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: forest_rock_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

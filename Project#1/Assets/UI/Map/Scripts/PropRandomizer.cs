@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class PropRandomizer : MonoBehaviour
 {
@@ -12,12 +13,6 @@ public class PropRandomizer : MonoBehaviour
         SpawnProps();
     }
 
-    
-    void Update()
-    {
-            
-    }
-
     void SpawnProps()
     {
         foreach (var sp in propSpawnPoints)
@@ -25,6 +20,9 @@ public class PropRandomizer : MonoBehaviour
             int rand = Random.Range(0, propPrefabs.Count);
             GameObject prop = Instantiate(propPrefabs[rand], sp.transform.position, Quaternion.identity);
             prop.transform.parent = sp.transform;
+
+            Collider2D col = prop.GetComponent<Collider2D>();
+            AstarPath.active.UpdateGraphs(col.bounds);
         }
     }
 }

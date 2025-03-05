@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Card> playerCards = new List<Card>();
+    // Now store CardScriptableObject instead of a MonoBehaviour
+    public List<CardScriptableObject> playerCards = new List<CardScriptableObject>();
 
-    public void AddCard(Card newCard)
+    // Updated signature to accept CardScriptableObject
+    public void AddCard(CardScriptableObject newCard)
     {
         if (playerCards.Count < 5)
         {
             playerCards.Add(newCard);
-        }
-        else
-        {
-            Debug.LogWarning("Already have 5 cards! Replace or remove if needed.");
         }
 
         if (playerCards.Count == 5)
@@ -22,11 +20,10 @@ public class GameManager : MonoBehaviour
             string bestHand = EvaluateHand(playerCards);
             Debug.Log($"Best Hand: {bestHand}");
             // Apply the corresponding buff/effect here
-            // e.g., ApplyBuff(bestHand);
         }
     }
 
-    private string EvaluateHand(List<Card> cards)
+    private string EvaluateHand(List<CardScriptableObject> cards)
     {
         Dictionary<int, int> rankCounts = new Dictionary<int, int>();
         Dictionary<CardSuit, int> suitCounts = new Dictionary<CardSuit, int> {
@@ -36,9 +33,10 @@ public class GameManager : MonoBehaviour
             { CardSuit.Spades,   0 }
         };
 
-        // Fill dictionaries
         List<int> ranks = new List<int>();
-        foreach (Card c in cards)
+
+        // Fill dictionaries
+        foreach (CardScriptableObject c in cards)
         {
             // Count suits
             suitCounts[c.suit]++;
@@ -55,10 +53,8 @@ public class GameManager : MonoBehaviour
 
         ranks.Sort();
 
-        // Pre-check: isFlush, isStraight
         bool isFlush = IsFlush(suitCounts);
         bool isStraight = IsStraight(ranks, out bool isAceLow);
-
         bool isRoyal = (isFlush && isStraight && !isAceLow && IsRoyalFlush(ranks));
 
         // Evaluate combos from strongest to weakest
@@ -84,7 +80,6 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-
     private bool IsStraight(List<int> sortedRanks, out bool isAceLow)
     {
         isAceLow = false;
@@ -94,6 +89,7 @@ public class GameManager : MonoBehaviour
             return true;
         }
 
+        // Special case: Ace can act as '1' in "A 2 3 4 5"
         if (sortedRanks[0] == 2 &&
             sortedRanks[1] == 3 &&
             sortedRanks[2] == 4 &&
@@ -104,10 +100,8 @@ public class GameManager : MonoBehaviour
             return true;
         }
 
-
         return false;
     }
-
 
     private bool IsConsecutive(List<int> sortedRanks)
     {
@@ -120,10 +114,8 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-
     private bool IsRoyalFlush(List<int> sortedRanks)
     {
-
         return (sortedRanks.Count == 5 &&
                 sortedRanks[0] == 10 &&
                 sortedRanks[1] == 11 &&

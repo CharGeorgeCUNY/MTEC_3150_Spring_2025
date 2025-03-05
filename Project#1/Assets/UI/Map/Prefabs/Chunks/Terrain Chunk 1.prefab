@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5979670239434397100}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PropsLoc5
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 260994548849189640}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.59, y: 6.41, z: 0}
+  m_LocalPosition: {x: -7.43, y: 6.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4348,7 +4348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895212023172033956}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PropsLoc4
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -4364,7 +4364,7 @@ Transform:
   m_GameObject: {fileID: 1236921310993502894}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.35, y: -5.66, z: 0}
+  m_LocalPosition: {x: -7.35, y: -5.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4473,7 +4473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propSpawnPoints:
   - {fileID: 3811898151512641112}
-  - {fileID: 5571181797043015413}
+  - {fileID: 0}
   - {fileID: 5549357059070231265}
   - {fileID: 1236921310993502894}
   - {fileID: 260994548849189640}
@@ -8751,7 +8751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3703747315090912695}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PropsLoc1
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -8782,7 +8782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7819251683137466000}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PropsLoc3
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -8798,38 +8798,7 @@ Transform:
   m_GameObject: {fileID: 5549357059070231265}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.74, y: -7.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1797074266730603961}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5571181797043015413
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6352562910413631011}
-  m_Layer: 6
-  m_Name: PropsLoc2
-  m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6352562910413631011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5571181797043015413}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.48, y: -4.26, z: 0}
+  m_LocalPosition: {x: 5.623, y: -7.412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8875,7 +8844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1797074266730603961}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Props
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8898,7 +8867,6 @@ Transform:
   - {fileID: 3703747315090912695}
   - {fileID: 7819251683137466000}
   - {fileID: 895212023172033956}
-  - {fileID: 6352562910413631011}
   - {fileID: 5979670239434397100}
   - {fileID: 7686228985506433861}
   m_Father: {fileID: 1691620907392629388}
@@ -8912,7 +8880,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7686228985506433861}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PropsLoc6
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -8928,7 +8896,7 @@ Transform:
   m_GameObject: {fileID: 6159318006164312787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 0, z: 0}
+  m_LocalPosition: {x: 5.5, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabCard : MonoBehaviour
 {
     // Reference to the Card script/data you'd like to add to the player's hand
-    public Card cardData;
+    public CardScriptableObject cardData;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

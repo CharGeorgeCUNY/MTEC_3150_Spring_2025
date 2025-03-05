@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3808483672561785495}
   - component: {fileID: 3863154787823304807}
-  - component: {fileID: 3435733581163275581}
-  m_Layer: 0
+  - component: {fileID: 4593646870164034049}
+  m_Layer: 7
   m_Name: forest_rock_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3435733581163275581
+--- !u!61 &4593646870164034049
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.020067722}
+  m_Offset: {x: -0.110506326, y: -0.17559904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,5 +128,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.7419868}
+  m_Size: {x: 0.4943959, y: 0.3642105}
   m_EdgeRadius: 0
