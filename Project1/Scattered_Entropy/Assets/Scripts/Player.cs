@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     public Vector2 Velocity;
     public Rigidbody2D rigidBody2D;
 
+    public GameObject EnemySpawn;
+
+    public List<Enemies> Enemies = new List<Enemies>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +32,22 @@ public class Player : MonoBehaviour
         
         Velocity *= Speed;
         rigidBody2D.velocity = Velocity;
+
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Vector2 randPos = new Vector2(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 3.0f));
+
+            //Qu don't change default
+            GameObject myEnemy = GameObject.Instantiate(EnemySpawn, randPos, transform.rotation);
+            Enemies.Add(myEnemy.GetComponent<Enemies>());
+        }
     }
+
+    // IEnumerator SpawnMon () {
+    //     float CurrentTime = 1.3f;
+    //     float TargetTime = CurrentTime
+    //     while (LoopTime < TargetTime) {
+    //         yield return null;
+    //     }
+    // }
 }
