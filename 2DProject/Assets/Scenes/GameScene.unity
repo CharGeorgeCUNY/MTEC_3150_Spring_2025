@@ -1271,7 +1271,7 @@ Transform:
   m_GameObject: {fileID: 514725205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.27, y: -0.95, z: 0}
+  m_LocalPosition: {x: 19.03, y: -2.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2712,7 +2712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556681063515847158, guid: ca5a35794d20847d3844af4b1c86c0fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.79
+      value: 8.58
       objectReference: {fileID: 0}
     - target: {fileID: 5556681063515847158, guid: ca5a35794d20847d3844af4b1c86c0fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3480,7 +3480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354121093045341953, guid: 86815adc101304d17a6fd88a951f9fd1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.818382
+      value: 47.82
       objectReference: {fileID: 0}
     - target: {fileID: 2354121093045341953, guid: 86815adc101304d17a6fd88a951f9fd1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5733,7 +5733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7643198871517924741, guid: 3f0378758a05341e387851583a751628, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.27881
+      value: 52.7
       objectReference: {fileID: 0}
     - target: {fileID: 7643198871517924741, guid: 3f0378758a05341e387851583a751628, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6213,7 +6213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556681063515847158, guid: ca5a35794d20847d3844af4b1c86c0fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.8675637
+      value: 6.95
       objectReference: {fileID: 0}
     - target: {fileID: 5556681063515847158, guid: ca5a35794d20847d3844af4b1c86c0fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6424,6 +6424,10 @@ PrefabInstance:
     - target: {fileID: 5019502608730448975, guid: 6699be491986840f8a8e17039bd0bbb5, type: 3}
       propertyPath: m_Name
       value: startTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019502608730448975, guid: 6699be491986840f8a8e17039bd0bbb5, type: 3}
+      propertyPath: m_TagString
+      value: enterRock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

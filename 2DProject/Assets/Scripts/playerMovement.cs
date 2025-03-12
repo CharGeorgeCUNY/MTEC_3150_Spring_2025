@@ -17,11 +17,15 @@ public class playerMovement : MonoBehaviour
 
     //note: could really use a jumping limitation 
     bool canJump;
-    //bool groundCheck = true;
+    public RaycastHit2D hit;
+    bool groundCheck = true;
     //int count = 0;
 
     //game over
     string currentSceneName;
+
+    //platform
+    //Platform platform;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,7 @@ public class playerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-
+       
         currentSceneName = SceneManager.GetActiveScene().name;
     }
 
@@ -39,6 +43,10 @@ public class playerMovement : MonoBehaviour
         velocity = Vector2.zero;
         velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         //float NormalizedSpeed = velocity.magnitude;
+
+        hit = Physics2D.Raycast(transform.position, -Vector2.up * 1.18f);
+        Debug.DrawRay(transform.position, -Vector2.up * 1.18f,Color.red);
+
 
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
 
@@ -56,11 +64,11 @@ public class playerMovement : MonoBehaviour
         }
         else
         {
-            isMoving = false;
-            animator.SetBool("isMoving", isMoving);
+            //isMoving = false;
+            //animator.SetBool("isMoving", isMoving);
 
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && groundCheck)
         {
             canJump = true;
             animator.SetBool("canJump", canJump);
@@ -71,7 +79,6 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("canJump", canJump);
         }
         velocity.Normalize();
-
         velocity *= speed;
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -81,8 +88,6 @@ public class playerMovement : MonoBehaviour
             //gameObject.SetActive(false);
             GameOver();
         }
-
-
     }
     //playmovement Specific
     void FixedUpdate()

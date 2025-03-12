@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -12,6 +13,8 @@ public class Platform : MonoBehaviour
 
     //player Controls
     bool playerContact;
+    playerMovement player;
+    bool hitCollider;
    
 
     // Start is called before the first frame update
@@ -24,8 +27,13 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(playerContact && (gameObject.tag == "fallingPlatform"))
+        if (player.hit.collider.gameObject.tag == "fallingPlatform")
+        {
+            Debug.Log("Hit object: " + player.hit.collider.gameObject.tag);
+            hitCollider = true;
+        }
+
+        if (playerContact && (gameObject.tag == "fallingPlatform"))
         {
 
             Debug.Log("PlayerContact");
@@ -46,14 +54,14 @@ public class Platform : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         //detect player
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && hitCollider)
         {
             playerContact = true;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")`)
         {
             playerContact = false;
         }
