@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     float TimeSpawned;
     public float BulletTimeAlive = 2f;
-    public float Speed = 20f; 
+    public float Speed = 20f;
     // Start is called before the first frame update
     void Start()
     {

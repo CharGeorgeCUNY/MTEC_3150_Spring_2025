@@ -7,7 +7,8 @@ public class spawner : MonoBehaviour
     // Start is called before the first frame update
     public Meteor MeteorPrefab;
     public float distance = 14f;
-    public float intervale = 1f;
+    public float intervale = 0.5f;
+
     void Start()
     {
         InvokeRepeating("DoSpawn", 1f, intervale);
