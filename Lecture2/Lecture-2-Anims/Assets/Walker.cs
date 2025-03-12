@@ -7,7 +7,11 @@ public class Walker : MonoBehaviour
     // Start is called before the first frame update
     public float speed = 3.0f;
     public Vector2 Velocity;
+<<<<<<< HEAD
     bool isWalking;
+=======
+    bool IsWalking;
+>>>>>>> main
     public Rigidbody2D rigidBody2D;
     public Animator animator;
     void Start()
@@ -21,6 +25,7 @@ public class Walker : MonoBehaviour
     {
         Velocity = Vector2.zero;
         Velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+<<<<<<< HEAD
         
         float NormalizedSpeed = Velocity.magnitude;
 
@@ -47,6 +52,23 @@ public class Walker : MonoBehaviour
         }
         
         
+=======
+
+        float NormalizedSpeed = Velocity.magnitude;
+
+        if(NormalizedSpeed > .2f)
+        {
+            IsWalking = true;
+        }
+        else
+        {
+            IsWalking = false;
+        }
+        Velocity.Normalize();
+        animator.SetFloat("Horizontal", Velocity.x);
+        animator.SetFloat("Vertical", Velocity.y);
+        animator.SetBool("IsWalking", IsWalking);
+>>>>>>> main
 
         Velocity *= speed;
         rigidBody2D.velocity   = Velocity;

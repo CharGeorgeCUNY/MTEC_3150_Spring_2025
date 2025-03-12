@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 1589226024}
   - component: {fileID: 1589226025}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 631206981, guid: eeb0b890b32c249779ea3f6a19373a49, type: 3}
+=======
+  m_Sprite: {fileID: -1265467676, guid: 4f9c9c9694c3b4bdf98855b125646022, type: 3}
+>>>>>>> main
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -686,7 +690,10 @@ MonoBehaviour:
   speed: 3
   Velocity: {x: 0, y: 0}
   rigidBody2D: {fileID: 0}
+<<<<<<< HEAD
   animator: {fileID: 0}
+=======
+>>>>>>> main
 --- !u!95 &1589226025
 Animator:
   serializedVersion: 5
@@ -697,7 +704,11 @@ Animator:
   m_GameObject: {fileID: 1589226019}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
+<<<<<<< HEAD
   m_Controller: {fileID: 9100000, guid: d7ac1ac98ec6c4f528830839fbbcc149, type: 2}
+=======
+  m_Controller: {fileID: 9100000, guid: 398f032879c514f03a9f41b0acae1be4, type: 2}
+>>>>>>> main
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
