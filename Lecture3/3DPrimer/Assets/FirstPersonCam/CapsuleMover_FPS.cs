@@ -27,15 +27,8 @@ public class CapsuleMove_FPS : MonoBehaviour
 
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        playerVelocity =  (transform.forward * move.z + transform.right * move.x) * playerSpeed;
 
-        if(move != Vector3.zero)
-            Debug.Log("Pre move" + move);
-        move =  transform.InverseTransformVector(move);
-        if(move!= Vector3.zero)
-            Debug.Log("Post Move" + move);
-        
-        playerVelocity.x = move.x * playerSpeed;
-        playerVelocity.z = move.z * playerSpeed;
         
 
         // Makes the player jump
