@@ -66,6 +66,6 @@ public class PlayerMovement : MonoBehaviour
         //This is where you calculate the movement direction.
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed *10f, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
 }
