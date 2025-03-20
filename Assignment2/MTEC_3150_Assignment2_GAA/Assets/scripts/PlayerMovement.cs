@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
 
-            rb.drag = groundDrag;
+            rb.drag = groundDrag; // oh drat this aint wworkin' Let me rubberduck the professor.
         }
         else
         {
