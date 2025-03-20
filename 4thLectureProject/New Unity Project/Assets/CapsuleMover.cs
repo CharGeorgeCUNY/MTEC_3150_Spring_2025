@@ -16,6 +16,7 @@ public class CapsuleMover : MonoBehaviour
     public GameObject CameraOne;
     public GameObject CameraTwo;
     public Camera main;
+    public LayerMask LayersToCheck;
     
 
     private void Start()
@@ -40,7 +41,9 @@ public class CapsuleMover : MonoBehaviour
         fwd = fwd * Input.GetAxis("Vertical");
         
         rght = rght * Input.GetAxis("Horizontal");
+        float y = playerVelocity.y;
         playerVelocity = (fwd + rght) * playerSpeed;
+        playerVelocity.y = y;
         if (move != Vector3.zero)
         {
             Quaternion LookingAt = Quaternion.LookRotation(move);
@@ -53,25 +56,11 @@ public class CapsuleMover : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
-
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            CameraOne.GetComponent<CinemachineVirtualCameraBase>().Priority = 50;
-
-            CameraTwo.GetComponent<CinemachineVirtualCameraBase>().Priority = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CameraOne.GetComponent<CinemachineVirtualCameraBase>().Priority = 0;
-
-            CameraTwo.GetComponent<CinemachineVirtualCameraBase>().Priority = 50;
-        }
-
-
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-
         groundedPlayer = controller.isGrounded;
         playerVelocity = controller.velocity;
+        Debug.Log(Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 1.9f, LayersToCheck));
+
     }
 }

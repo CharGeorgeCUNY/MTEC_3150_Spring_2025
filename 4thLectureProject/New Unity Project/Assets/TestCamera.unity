@@ -355,6 +355,10 @@ MonoBehaviour:
   maxDegreeDelta: 45
   CameraOne: {fileID: 389507304}
   CameraTwo: {fileID: 466107378}
+  main: {fileID: 0}
+  LayersToCheck:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!143 &342836594
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1695,7 +1699,7 @@ GameObject:
   - component: {fileID: 1818504232}
   - component: {fileID: 1818504231}
   - component: {fileID: 1818504230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
