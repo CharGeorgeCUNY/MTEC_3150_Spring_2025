@@ -9,19 +9,20 @@ public class CapsuleMover : MonoBehaviour
     public Vector3 playerVelocity;
     [SerializeField]
     private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
-    private float jumpHeight = 1.0f;
+    public float playerSpeed = 2.0f;
+    public float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
     public float maxDegreeDelta = 45.0f;
-    public GameObject CameraOne;
-    public GameObject CameraTwo;
-    public Camera main;
+    // public GameObject CameraOne;
+    // public GameObject CameraTwo;
+    public Camera mainCam;
     
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        main = Camera.main;
+        mainCam = Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -29,18 +30,25 @@ public class CapsuleMover : MonoBehaviour
 
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        Vector3 fwd = main.transform.forward;
-        fwd.y = 0.0f;
-        fwd.Normalize();
+        
+        Vector3 forward = mainCam.transform.forward;
+        forward.y = 0.0f;
+        forward.Normalize();
 
-        Vector3 rght = main.transform.right;
+        Vector3 rght = mainCam.transform.right;
         rght.y = 0.0f;
         rght.Normalize();
 
-        fwd = fwd * Input.GetAxis("Vertical");
+        forward *= Input.GetAxis("Vertical");
         
-        rght = rght * Input.GetAxis("Horizontal");
-        playerVelocity = (fwd + rght) * playerSpeed;
+        rght *= Input.GetAxis("Horizontal");
+
+        // Save the y and reapply after playerVelocity is reassigned to the player's updated movement
+        float y = playerVelocity.y;
+
+        playerVelocity = (forward + rght) * playerSpeed;
+        playerVelocity.y = y;
+
         if (move != Vector3.zero)
         {
             Quaternion LookingAt = Quaternion.LookRotation(move);
@@ -51,22 +59,9 @@ public class CapsuleMover : MonoBehaviour
         // Makes the player jump
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
+            // Calculus | 1-5 (jump height) times -2 times -9.81 (gravity) square rooted
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
-
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            CameraOne.GetComponent<CinemachineVirtualCameraBase>().Priority = 50;
-
-            CameraTwo.GetComponent<CinemachineVirtualCameraBase>().Priority = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CameraOne.GetComponent<CinemachineVirtualCameraBase>().Priority = 0;
-
-            CameraTwo.GetComponent<CinemachineVirtualCameraBase>().Priority = 50;
-        }
-
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
