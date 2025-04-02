@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pallet
+  - canPickup
+  - Fish
+  - movingPlatform
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - Water
   - UI
   - thisIsGround
-  - 
+  - fishLayer
   - 
   - 
   - PostProcess
