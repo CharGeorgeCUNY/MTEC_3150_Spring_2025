@@ -9,13 +9,27 @@ public class GameManager : MonoBehaviour
     public float interactionRange = 10f; // Distance to collect fish
     public Transform player; // this is where you pull in the player in the inspector
 
+    //Music Stuff
+    public AudioClip fishSFX;
+    public AudioClip music;
+    private AudioSource audioSource;
+
+
     void Start()
     {
+
         startTime = Time.time;
+
+        //Music Stuff
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = music;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     void Update()
     {
+
         // Check if more than 4 minutes have happened since the start.
         if (Time.time - startTime > 240f)
         {
@@ -52,6 +66,7 @@ public class GameManager : MonoBehaviour
                 Destroy(fish);
                 fishCounter++;
                 Debug.Log("Fish collected! Total: " + fishCounter);
+                audioSource.PlayOneShot(fishSFX);
                 break; // the break makes it so that it doesnt collect more than one. They are spaced out, but this was useful when I was developing the feature.
             }
         }
