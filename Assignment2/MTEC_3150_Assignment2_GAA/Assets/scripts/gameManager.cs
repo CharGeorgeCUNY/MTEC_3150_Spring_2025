@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
         {
             CollectNearbyFish();
         }
+
+        // Reset if the player falls below -40
+        if (player.position.y < -40f)
+        {
+            ResetScene();
+        }
     }
 
     void CollectNearbyFish()
