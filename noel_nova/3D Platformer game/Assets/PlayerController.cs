@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         // Jumping with Spacebar
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * 100);
+            rb.AddForce(Vector3.up * 300);
             
         }
     }
