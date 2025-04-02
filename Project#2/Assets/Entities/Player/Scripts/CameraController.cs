@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform revolver;
+    public float sensX = 400;
+    public float sensY = 400;
 
-    public float sensX = 100f;
-    public float sensY = 100f;
-
+    public Transform cam;
     public Transform orientation;
 
-    float rotationX = 0f;
-    float rotationY = 0f;
+    private float mouseX;
+    private float mouseY;
 
-    void Start()
+    private float multiplier = 0.01f;
+
+    private float rotationX;
+    private float rotationY;
+
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    void Update()
+    private void Update()
     {
-        // Get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        ProcessInputs();
 
-        // Rotate on X axis (pitch)
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -30f, 90f);
-      
+        cam.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+        orientation.rotation = Quaternion.Euler(0, rotationY, 0);
+    }
 
-        // Rotate on Y axis (yaw)
-        rotationY += mouseX;
+    private void ProcessInputs()
+    {
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
 
-        // Apply rotations
-        transform.rotation = Quaternion.Euler(rotationX, rotationY, 0); // Camera rotation
-        orientation.rotation = Quaternion.Euler(0, rotationY, 0); // Orientation rotation
+        rotationY += mouseX * sensX * multiplier;
+        rotationX -= mouseY * sensY * multiplier;
+
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
     }
 }
