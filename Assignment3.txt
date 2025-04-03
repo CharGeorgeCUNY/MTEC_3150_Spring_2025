@@ -1,0 +1,8 @@
+Assignment 3: ITERATE ON A PROJECT
+
+Due April 23rd
+
+The third project will be an iteration on one of your previous two projects.  The project will be due April 23rd.  That will give us one day of class work and 2 weeks of out of class work to work on it (not including spring break).  It spans the break week, but i don't expect you to be working on it over break, 2 weeks should be sufficient time to complete it please keep that in mind as you scope your work.  Examples of Things you can do: Gameplay improvements based on feedback, graphical improvements, start and end screens, multiple levels.  But whatever else you feel like the game needs. We are going to be moving more towards completed games here, so I will be looking for more polish and quality as we move towards the final project.
+
+The week of April 9th: Please have a working version of the game, be prepared to give and receive feedback.  We will be playing each others games in class.  THIS IS AN IMPORTANT SESSION TO ATTEND.  Part of the grade for this assignment will be based on you having something to play next week.    15% of the grade, all or nothing.  
+ 
