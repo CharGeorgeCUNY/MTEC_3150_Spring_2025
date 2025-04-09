@@ -17,6 +17,9 @@ public class CapsuleMover : MonoBehaviour
     // public GameObject CameraTwo;
     public Camera mainCam;
     
+    bool isWalking;
+    bool isJumping;
+    public Animator animator;
 
     private void Start()
     {
@@ -47,19 +50,27 @@ public class CapsuleMover : MonoBehaviour
         float y = playerVelocity.y;
 
         playerVelocity = (forward + rght) * playerSpeed;
-        playerVelocity.y = y;
-
+        
         if (move != Vector3.zero)
         {
-            Quaternion LookingAt = Quaternion.LookRotation(move);
+            Quaternion LookingAt = Quaternion.LookRotation(playerVelocity, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, LookingAt, maxDegreeDelta * Time.deltaTime);
+            // transform.rotation = LookingAt;
+            
         }
+        
+        playerVelocity.y = y;
+
+        playerVelocity.Normalize();
+        animator.SetBool("isWalking", isWalking);
 
         // Makes the player jump
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
             // Calculus | 1-5 (jump height) times -2 times -9.81 (gravity) square rooted
+
+            
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
 
@@ -68,5 +79,30 @@ public class CapsuleMover : MonoBehaviour
 
         groundedPlayer = controller.isGrounded;
         playerVelocity = controller.velocity;
+
+        float NormalizedSpeed = playerVelocity.magnitude;
+
+        if (NormalizedSpeed > .2f)
+        {
+            isWalking = true;
+        }
+
+        else
+        {
+            isWalking = false;
+        }
+
+        if (NormalizedSpeed > .2f)
+        {
+            isJumping = true;
+        }
+
+        else
+        {
+            isJumping = false;
+        }
+
+        playerVelocity.Normalize();
+        animator.SetBool("isJumping", isJumping);
     }
 }

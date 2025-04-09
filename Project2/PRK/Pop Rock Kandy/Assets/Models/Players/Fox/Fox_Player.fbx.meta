@@ -15,7 +15,7 @@ ModelImporter:
       name: m_fox.001
     second: {fileID: 2100000, guid: 7b51fe4521eca074d95eb803efbbc49a, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -26,9 +26,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tAmbiguous Transform 'Armature/Hips/Spine/Chest/Neck/Head'
-      and 'Head' found in hierarchy for human bone 'Head'. Transform name mapped
-      to a human bone must be unique.\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
