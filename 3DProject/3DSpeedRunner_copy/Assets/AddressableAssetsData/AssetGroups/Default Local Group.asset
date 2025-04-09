@@ -17,23 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: de607640d33244648817e8ca96cfd13e
   m_SerializeEntries:
-  - m_GUID: a455956a9affd4fecaefd6db2aea3173
-    m_Address: Assets/referenceGameAssets/Models/NightTime/Materials/VCOL.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d7af004c9d418448887075d6ca37af68
-    m_Address: Assets/referenceGameAssets/Models/NightTime/Materials/Stone.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5743a6800e72b45daadefdb4cb3408d5
     m_Address: Assets/Prefabs/Ch03_Body.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba32940091fa1bf4eb3605bc89fc4cd2
-    m_Address: Assets/referenceGameAssets/Materials/Car02.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
