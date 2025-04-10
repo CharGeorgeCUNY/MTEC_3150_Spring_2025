@@ -15,7 +15,9 @@ public class TileBasedMover : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// This update is an exmaple of using the 
+    /// </summary>
     void Update()
     {
         int rand = Random.Range(0, Objects.Length-1);
