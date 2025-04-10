@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 342836589}
   - component: {fileID: 342836594}
   - component: {fileID: 342836593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ MonoBehaviour:
   main: {fileID: 0}
   LayersToCheck:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
 --- !u!143 &342836594
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1593,7 +1593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1787013956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

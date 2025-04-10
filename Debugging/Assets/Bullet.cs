@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         iDamageable testObj = collision.gameObject.GetComponent<iDamageable>();
         if(testObj != null)

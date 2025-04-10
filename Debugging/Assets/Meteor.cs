@@ -47,7 +47,7 @@ public class Meteor : iDamageable
 
     public void onDestroyDamage()
     {
-        BlinkRed();
+        StartCoroutine(BlinkRed());
         //Destroy(this.gameObject);
     }
     public void onDestroyTime()
@@ -57,8 +57,9 @@ public class Meteor : iDamageable
 
     public IEnumerator BlinkRed()
     {
+        Debug.Log("Made it Into the coroutine");
         WaitForSeconds delay = new WaitForSeconds(0.05f);
-        gameamanger.GetGameManager().IncrementScore();
+        GameTheManager.GetGameManager().IncrementScore();
         //canTakeDamage = false;
         sr.color = Color.red;
         yield return delay;
