@@ -3,12 +3,12 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameamanger : MonoBehaviour
+public class GameTheManager : MonoBehaviour
 {
-    private static gameamanger _gameManager;
-    public static gameamanger GetGameManager()
+    private static GameTheManager _gameManager;
+    public static GameTheManager GetGameManager()
     {
-        return GameObject.FindObjectOfType<gameamanger>();
+        return GameObject.FindObjectOfType<GameTheManager>();
     }
     // Start is called before the first frame update
     public TextMeshProUGUI ScoreText;
@@ -27,7 +27,7 @@ public class gameamanger : MonoBehaviour
 
     public void IncrementScore()
     {
-        Score++;
+         Score++;
         SetScoreDraw();
         CheckScore();
     }
@@ -40,8 +40,8 @@ public class gameamanger : MonoBehaviour
 
     public void CheckScore()
     {
-        bool isScore = (Score==5);
-        if(isScore = false)
+         bool isScore = (Score==5);
+        if(isScore = true)
         {
            Debug.Log("You win!");
         }
