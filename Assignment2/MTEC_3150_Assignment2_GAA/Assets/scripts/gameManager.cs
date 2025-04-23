@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public AudioClip music;
     private AudioSource audioSource;
 
+    // Particle Stuff
+    public GameObject fishCollectParticles;
+
 
     void Start()
     {
@@ -66,7 +69,9 @@ public class GameManager : MonoBehaviour
                 Destroy(fish);
                 fishCounter++;
                 Debug.Log("Fish collected! Total: " + fishCounter);
+                Instantiate(fishCollectParticles, fish.transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(fishSFX);
+                
                 break; // the break makes it so that it doesnt collect more than one. They are spaced out, but this was useful when I was developing the feature.
             }
         }
