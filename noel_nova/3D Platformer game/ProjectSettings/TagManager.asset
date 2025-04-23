@@ -6,6 +6,8 @@ TagManager:
   tags:
   - 'Platforms '
   - MovingPlatforms
+  - Killzone
+  - Finisher
   layers:
   - Default
   - TransparentFX
