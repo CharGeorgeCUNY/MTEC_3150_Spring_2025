@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,10 +14,10 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
-  - 
+  - whatIsEnemy
+  - whatIsPlayer
+  - whatIsWall
+  - whatIsGround
   - 
   - 
   - 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CapsuleMover1 : MonoBehaviour
+public class CPUMover : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

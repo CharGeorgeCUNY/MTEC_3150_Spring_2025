@@ -2,87 +2,136 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 public class CapsuleMover : MonoBehaviour
 {
-    
-    public float playerSpeed = 3.0f;
-    public float rotationSpeed;
+    [Header("Movement")]
+    public float moveSpeed;
 
-    public float jumpSpeed;
-    private float ySpeed;
-    private CharacterController connect;
-    public bool isGrounded;
+    public float groundDrag;
 
-    // private Rigidbody rb;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool readyToJump;
 
-    // Start is called before the first frame update
-    void Start()
+    [HideInInspector] public float walkSpeed;
+    [HideInInspector] public float sprintSpeed;
+
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
+
+    [Header("Ground Check")]
+    public float playerHeight;
+    public LayerMask whatIsGround;
+    bool grounded;
+
+    public Transform orientation;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
+    Rigidbody rb;
+
+    private void Start()
     {
-        //player is on the ground when game starts
-        // isGrounded = true;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
 
-        // rb = gameObject.GetComponent<Rigidbody>();
-        connect = gameObject.GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        readyToJump = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = Input.GetAxis("Vertical");
-        
-        Vector3 moveDirection = new Vector3(horizontalMove, 0, verticalMove);
-        moveDirection.Normalize();
-        
-        float magnitude = moveDirection.magnitude;
-        magnitude = Mathf.Clamp01 (magnitude);
-        // transform.Translate(moveDirection * magnitude * playerSpeed * Time.deltaTime, Space.World);
-        connect.SimpleMove(moveDirection * magnitude * playerSpeed); //moves player with speed
+        // ground check
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        //the physics of gravity "-9.81" will be assigned to the y speed multiplied by the timing of each frame
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        MyInput();
+        SpeedControl();
 
-        if (Input.GetButtonDown("Jump")) {
-            //assign now as a constant rate when space is pressed
-            ySpeed = -0.5f;
-            isGrounded = false;
-        }
+        // handle drag
+        if (grounded)
+            rb.drag = groundDrag;
+        else
+            rb.drag = 0;
+    }
 
-        Vector3 playerVel = moveDirection * magnitude; //change in direction * it's magnitude per update = velocity
-        // transform.Translate(playerVel * Time.deltaTime);
-        connect.Move(playerVel * Time.deltaTime);
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
 
-        if (connect.isGrounded)
+    private void MyInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        // when to jump
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            ySpeed = -0.5f; 
-            isGrounded = true;
+            readyToJump = false;
 
-            if (Input.GetButtonDown("Jump")) {
-                ySpeed = jumpSpeed;
-                isGrounded = false;
-            }
-        }
+            Jump();
 
-        if (moveDirection != Vector3.zero) {
-            Quaternion toRotate = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
-            
-        
-        // if (Input.GetButtonDown("Jump")) {
-        //     rb.velocity = new Vector3(0f, 5f, 0f);
-        //     Debug.Log("I am pressing the spacebar");
-        // }
     }
 
-    // void OnCollisionExit(Collision collision)
-    // {
-    //     collision.gameObject.CompareTag("ground");
-    //     isGrounded = false;
-    // }
+    private void MovePlayer()
+    {
+        // calculate movement direction
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        // on ground
+        if(grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        // in air
+        else if(!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        // limit velocity if needed
+        if(flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    private void Jump()
+    {
+        // reset y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+    private void ResetJump()
+    {
+        readyToJump = true;
+    }
+
+    public void WinEndScene() {
+        SceneManager.LoadScene("EndSceneWin");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.tag == "Enemy"){
+            Debug.Log("Opposing player targeted");
+            WinEndScene();
+        }
+    }
 }
