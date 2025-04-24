@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Cinemachine;
+public class Cam1Control : MonoBehaviour
+{
+    CinemachineVirtualCamera VC1;
+    CinemachineVirtualCamera VC2;
+    CinemachineVirtualCamera VC3;
+   
+    private void OnTriggerEnter(Collider other)
+    {
+        VC1 = GameObject.Find("VC1").GetComponent<CinemachineVirtualCamera>();
+        VC2 = GameObject.Find("VC2").GetComponent<CinemachineVirtualCamera>();
+        VC3 = GameObject.Find("VC3").GetComponent<CinemachineVirtualCamera>();
+
+        if (other.tag == "Player")
+        {
+            VC1.enabled = true;
+            VC2.enabled = false;
+            VC3.enabled = false;
+        }
+
+    }
+}
