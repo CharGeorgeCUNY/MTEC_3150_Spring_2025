@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayMovement : MonoBehaviour
+public class PlayerMovementTest : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
 
     public float groundDrag;
 
-    public float jumpforce;
-    public float jumpcooldown;
-    public float airMulitplier;
-    bool readyToJump;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool readyToJump = true;
 
-    [Header("keybinds")]
+    [HideInInspector] public float walkSpeed;
+    [HideInInspector] public float sprintSpeed;
+
+    [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsround;
+    public LayerMask whatIsGround;
     bool grounded;
+    bool groundtouch;
 
     public Transform orientation;
 
@@ -30,78 +34,102 @@ public class PlayMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        ResetJump();
+
     }
+
     private void Update()
     {
-        // Checking Ground
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsround);
+        // ground check
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.8f, whatIsGround);
+            grounded = groundtouch == true;
 
         MyInput();
         SpeedControl();
 
-        // Handle Drag
+        // handle drag
         if (grounded)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
     }
+
     private void FixedUpdate()
     {
         MovePlayer();
     }
+
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        //when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        // when to jump
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            readyToJump = false;
 
             Jump();
 
-            Invoke(nameof(ResetJump), jumpcooldown);
+            Invoke(nameof(ResetJump), jumpCooldown); 
+            readyToJump = false;
         }
     }
+
     private void MovePlayer()
     {
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-
         // on ground
-        if (grounded)
+        if(grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulitplier, ForceMode.Force);
+        else if(!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
+
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
+        if(flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
+
     private void Jump()
     {
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     private void ResetJump()
     {
         readyToJump = true;
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
+        {
+            groundtouch = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
+        {
+            groundtouch = false;
+        }
     }
 }
