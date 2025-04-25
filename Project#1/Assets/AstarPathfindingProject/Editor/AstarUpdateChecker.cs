@@ -148,9 +148,7 @@ namespace Pathfinding {
 		/// </summary>
 		static void UpdateCheckLoop () {
 			// Go on until the update check has been completed
-			if (!CheckForUpdates()) {
-				EditorApplication.update -= UpdateCheckLoop;
-			}
+
 		}
 
 		/// <summary>
@@ -231,7 +229,6 @@ namespace Pathfinding {
 		/// <summary>Handles the data from the update page</summary>
 		static void UpdateCheckCompleted (string result) {
 			EditorPrefs.SetString("AstarServerMessage", result);
-			ParseServerMessage(result);
 			ShowUpdateWindowIfRelevant();
 		}
 

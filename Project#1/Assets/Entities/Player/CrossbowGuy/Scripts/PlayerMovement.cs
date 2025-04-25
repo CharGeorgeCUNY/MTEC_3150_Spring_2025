@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     [HideInInspector] public Vector2 movement;
     [HideInInspector] public Vector2 lastMovement;
-    [HideInInspector] public Direction currentDirection = Direction.Down;
     Animator animator;
 
     bool facingLeft = true;

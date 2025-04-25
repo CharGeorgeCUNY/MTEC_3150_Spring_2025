@@ -10,13 +10,18 @@ public class EnemyMovement : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
+    private Vector2 lastPosition;
+    private float stuckThreshold = 0.5f; // The distance threshold for being considered stuck
+
     Seeker seeker;
     Rigidbody2D rb;
+    Animator animator; // Reference to the Animator
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // Get the Animator component
         player = FindObjectOfType<PlayerMovement>().transform;
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
@@ -46,12 +51,34 @@ public class EnemyMovement : MonoBehaviour
         }
         else { reachedEndOfPath = false; }
 
+        // Direction to the next waypoint
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * enemyData.MoveSpeed * Time.fixedDeltaTime;
 
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, nextWaypointDist);
+
+        if (hit.collider != null)
+        {
+            direction = Vector2.Perpendicular(direction);
+        }
+
+        Vector2 force = direction * enemyData.MoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + force);
 
+        // Update animation parameters
+        UpdateAnimation(direction);
+
+        // Check if we are close enough to the next waypoint
         float dist = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (dist < nextWaypointDist) { currentWaypoint++; }
+    }
+
+    // Function to update animation based on movement direction
+    void UpdateAnimation(Vector2 direction)
+    {
+        if (direction.magnitude > 0.1f)
+        {
+            animator.SetFloat("MoveX", direction.x);
+            animator.SetFloat("MoveY", direction.y);
+        }
     }
 }

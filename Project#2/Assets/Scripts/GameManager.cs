@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public TextMeshProUGUI timerText;
+    float timer = 0.0f;
+
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        int seconds = Mathf.FloorToInt(timer % 60);
+        timerText.text = "Time survived : " + seconds.ToString();
     }
 }
