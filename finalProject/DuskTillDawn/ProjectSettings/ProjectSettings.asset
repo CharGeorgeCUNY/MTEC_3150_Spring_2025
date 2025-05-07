@@ -645,7 +645,20 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: TITAN_EDITOR_MODE
+    EmbeddedLinux: TITAN_EDITOR_MODE
+    GameCoreXboxOne: TITAN_EDITOR_MODE
+    Nintendo Switch: TITAN_EDITOR_MODE
+    PS4: TITAN_EDITOR_MODE
+    PS5: TITAN_EDITOR_MODE
+    QNX: TITAN_EDITOR_MODE
+    Stadia: TITAN_EDITOR_MODE
+    Standalone: TITAN_EDITOR_MODE;__MICROSPLAT__
+    VisionOS: TITAN_EDITOR_MODE
+    WebGL: TITAN_EDITOR_MODE
+    XboxOne: TITAN_EDITOR_MODE
+    tvOS: TITAN_EDITOR_MODE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
