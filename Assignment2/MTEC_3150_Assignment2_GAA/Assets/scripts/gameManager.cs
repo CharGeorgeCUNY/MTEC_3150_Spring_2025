@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     // Particle Stuff
     public GameObject fishCollectParticles;
+
+    // UI Stuff
+    public TextMeshProUGUI fishText; // Drag the TMP object into here in the inspector
 
 
     void Start()
@@ -71,9 +75,18 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Fish collected! Total: " + fishCounter);
                 Instantiate(fishCollectParticles, fish.transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(fishSFX);
-                
+                UpdateFishText();
+
                 break; // the break makes it so that it doesnt collect more than one. They are spaced out, but this was useful when I was developing the feature.
             }
+        }
+    }
+
+    void UpdateFishText()
+    {
+        if (fishText != null)
+        {
+            fishText.text = "Fish collected: " + fishCounter + " / 4";
         }
     }
 
