@@ -5,12 +5,9 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     Rigidbody rbPlayer;
-    //Vector3 move;
 
-    float speedDefault = 10.0f;
-    float speedMid = 9.0f;
-    float speedHigh = 13.0f;
-
+    float speedDefault = 7.0f;
+    public float fullSpeedfill = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,23 +18,73 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //rbPlayer.velocity = Vector3.forward * speedDefault;
+
+        setSpeed();
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            rbPlayer.velocity = Vector3.forward * speedDefault;
+            rbPlayer.velocity = (transform.forward * speedDefault);
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            rbPlayer.velocity = Vector3.right * 2.0f;
+            Quaternion LookingAt = Quaternion.LookRotation(transform.right, transform.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, LookingAt, 45.0f * Time.deltaTime);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rbPlayer.velocity = Vector3.left * 2.0f;
+            Quaternion LookingAt = Quaternion.LookRotation(transform.right, transform.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, LookingAt, -45.0f * Time.deltaTime);
+            //rbPlayer.velocity = -transform.right * 2.0f;
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            rbPlayer.velocity = -Vector3.forward * speedDefault;
+            rbPlayer.velocity = (-transform.forward * speedDefault);
         }
 
     }
+
+    void setSpeed()
+    {
+        if (Input.GetKey(KeyCode.Z)){
+            speedDefault = 10.0f;
+            fullSpeedfill -= 1.0f * Time.deltaTime;
+        }
+        else if (Input.GetKey(KeyCode.X))
+        {
+            speedDefault = 15.0f;
+        }
+
+    }
+
+    //public IEnumerator roadBlock1()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(5.0f);
+    //    blockOne.SetActive(true);
+    //    yield return delay;
+    //    blockOne.SetActive(false);
+
+    //}
+    //public IEnumerator roadBlock2()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(5.0f);
+    //    blockTwo.SetActive(true);
+    //    yield return delay;
+    //    blockTwo.SetActive(false);
+
+    //}
+    //public IEnumerator roadBlock3()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(5.0f);
+    //    blockOne.SetActive(true);
+    //    yield return delay;
+    //    blockTwo.SetActive(false);
+
+    //}
+    //public IEnumerator roadBlock4()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(5.0f);
+    //    blockOne.SetActive(true);
+    //    yield return delay;
+    //    blockTwo.SetActive(false);
+    //}
 }
