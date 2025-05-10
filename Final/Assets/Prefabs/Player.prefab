@@ -141,7 +141,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9002844783740949762}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -175,6 +175,10 @@ MonoBehaviour:
   animator: {fileID: 4963271013055123118}
   rotationSpeed: 360
   smoothRotationSpeed: 5
+  decelerationRate: 1
+  ballSpeedBoost: 10
+  ballGravityScale: 1
+  rb: {fileID: 296724869100564122}
 --- !u!95 &4963271013055123118
 Animator:
   serializedVersion: 5

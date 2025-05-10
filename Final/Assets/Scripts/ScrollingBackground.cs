@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour
 {
-    public float speed;
+    [Tooltip("Assign your Player gameObject (with PlayerMovement on it) here")]
+    [SerializeField] private PlayerMovement playerMovement;
 
-    [SerializeField] Renderer bgRenderer;
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Renderer bgRenderer;
 
-    // Update is called once per frame
     void Update()
     {
-        bgRenderer.material.mainTextureOffset += new Vector2(speed * Time.deltaTime, 0);
+        if (playerMovement == null)
+        {
+            Debug.LogWarning("[ScrollingBackground] No PlayerMovement assigned!");
+            return;
+        }
+
+        // Grab the player's horizontal speed:
+        float playerSpeed = playerMovement.CurrentSpeed;
+
+        // Scroll the texture by exactly that amount (per second):
+        bgRenderer.material.mainTextureOffset +=
+            new Vector2(playerSpeed * Time.deltaTime, 0f);
+
+        Debug.Log($"[ScrollingBackground] playerSpeed={playerSpeed:F2}, offset.x={bgRenderer.material.mainTextureOffset.x:F2}");
     }
 }
