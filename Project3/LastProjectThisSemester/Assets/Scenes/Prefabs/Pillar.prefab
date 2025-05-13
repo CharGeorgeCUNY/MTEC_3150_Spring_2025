@@ -13,8 +13,12 @@ PrefabInstance:
       value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 827401730870282600, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 827401730870282600, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 5.9500003
       objectReference: {fileID: 0}
     - target: {fileID: 827401730870282600, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
       propertyPath: m_LocalPosition.y
@@ -88,6 +92,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fb14e0f0e0976ab4990cc52c7fb90734, type: 3}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Color.b
+      value: 0.69295114
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7800733
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_DrawMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874613888336255781, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTileMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345531029274361844, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345531029274361844, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345531029274361844, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345531029274361844, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTiling
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8099578215292468193, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
       propertyPath: m_Name
       value: Pillar
@@ -95,6 +147,18 @@ PrefabInstance:
     - target: {fileID: 8099578215292468193, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212462338842635128, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 75d56733ed83ba94fb14e142470e3881, type: 3}
+    - target: {fileID: 8647948223118726291, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647948223118726291, guid: d9b075c6166b67941b2975f6f9e67067, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

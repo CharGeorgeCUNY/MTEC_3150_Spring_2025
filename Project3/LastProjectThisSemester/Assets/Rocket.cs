@@ -7,6 +7,10 @@ using static System.TimeZoneInfo;
 
 public class Rocket : MonoBehaviour
 {
+
+
+    AudioSource auso;
+    ParticleSystem ps;
     GameManager gm;
     public float FlySpeed;
     bool getrocketstartpos =true;
@@ -19,6 +23,9 @@ public class Rocket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        auso = GetComponent<AudioSource>();
+        ps = GetComponent<ParticleSystem>();
+        ps.Pause();
         gm = GetComponentInParent<GameManager>();
     }
 
@@ -35,6 +42,8 @@ public class Rocket : MonoBehaviour
     {
         if (TimeToGo)
         {
+            
+            ps.Play();
             if (getrocketstartpos)
             {
                 currentpos = this.transform.position;
@@ -54,6 +63,7 @@ public class Rocket : MonoBehaviour
     }
     IEnumerator FlyAway()
     {
+        auso.Play();
         this.transform.parent = null;
         TimeToGo = true;
         this.gameObject.tag = "Untagged";

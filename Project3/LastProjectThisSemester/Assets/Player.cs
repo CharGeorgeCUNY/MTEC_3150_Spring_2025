@@ -11,6 +11,10 @@ using static UnityEngine.GraphicsBuffer;
 public class Player : MonoBehaviour
 {
 
+    bool loadsound = true;
+   [SerializeField] Sprite neutral, jumping;
+
+    AudioSource Auso;
     Rigidbody2D rb;
     Transform planet;
     public bool LevelComplete;
@@ -18,13 +22,17 @@ public class Player : MonoBehaviour
     public int JumpForce = 150;
     public float playerGrav = 3;
     Transform CurrentGround;
+    public GameObject sizz;
+
 
     public int movespeed;
+    GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gm = GetComponentInParent<GameManager>();
+        Auso = GetComponent<AudioSource>();
         LevelComplete = false;
          rb = GetComponent<Rigidbody2D>();
         
@@ -33,6 +41,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
+
+
+
 
         if (this.transform.parent == GetComponentInParent<GameManager>().transform) planet = GameObject.Find("Planet(Clone)").GetComponent<Transform>();
         else planet = GetComponentInParent<Planet>().transform;
@@ -53,11 +68,15 @@ public class Player : MonoBehaviour
         }
         if (grounded())
         {
-            
+            if (loadsound) { Auso.pitch = Random.Range(.7f, 1.3f); Auso.Play(); loadsound = false; }
+            this.GetComponent<SpriteRenderer>().sprite = neutral;
             this.transform.parent = CurrentGround;
+           
         }
         else
         {
+            loadsound = true;
+            this.GetComponent<SpriteRenderer>().sprite = jumping;
             this.transform.parent = GetComponentInParent<GameManager>().transform;
         }
         //Debug.Log(grounded());
@@ -66,7 +85,9 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(GetComponentInParent<GameManager>().killplayerok) Destroy(this.gameObject);
+        
+
+        if (GetComponentInParent<GameManager>().killplayerok) Destroy(this.gameObject);
        
         if(rb.angularVelocity != 0) Debug.Log(rb.angularVelocity);
         FollowTargetWitouthRotation(planet, 1, playerGrav);
@@ -111,7 +132,10 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Planet")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gm.playerdied = true;
+            Instantiate(sizz, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else if(collision.tag == "Rocket")
         {

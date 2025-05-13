@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]GameObject planet;
     [SerializeField]GameObject player;
 
+
+    AudioClip splat;
+    public bool playerdied;
     public bool LevelComplete = false;
     public int levelTimer = 10;
     public bool killplayerok = false;
@@ -18,10 +21,11 @@ public class GameManager : MonoBehaviour
 
     public int TransitionTimer;
 
-
+    AudioSource Auso;
 
     private void Start()
     {
+        Auso = GetComponent<AudioSource>();
         NewGame();
     }
     void FixedUpdate()
@@ -29,6 +33,8 @@ public class GameManager : MonoBehaviour
         if(GetComponentInChildren<Player>() != null) LevelComplete = GetComponentInChildren<Player>().LevelComplete;
         if (LevelComplete) killplayerok = true;
         else killplayerok = false;
+
+        if (playerdied) PlayerDied();
 
 
 
@@ -69,12 +75,26 @@ public class GameManager : MonoBehaviour
         
 
     }
+    private void PlayerDied()
+    {
+        playerdied = false;
+        Auso.Play();
+
+        StartCoroutine(StartNewAfterPlayerDeath());
+
+    }
+    private IEnumerator StartNewAfterPlayerDeath()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+   
     private IEnumerator LevelCountDown()
     {
         yield return new WaitForSeconds(levelTimer);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
         //NewGame();
-    
+
     }
     private IEnumerator NextLevel()
     {

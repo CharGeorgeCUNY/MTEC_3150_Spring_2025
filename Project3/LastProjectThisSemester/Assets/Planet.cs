@@ -9,15 +9,20 @@ public class Planet : MonoBehaviour
     public GameObject ShortPillarPref;
     public GameObject HookedPillarPref;
     GameManager gm;
+    SpriteRenderer sr;
     float TransitionTimer;
     public int fallSpeed;
     public int rotSpeed;   // Start is called before the first frame update
     void Start()
     {
-        
+        Color randColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        sr = GetComponent<SpriteRenderer>();
+       // sr.color = randColor;
         gm = GetComponentInParent<GameManager>();
         TransitionTimer = gm.TransitionTimer;
         StartCoroutine(FallDown());
+        
+       
         int NumOfTowers = Random.Range(5, 15);
         for (int i = 0; i < NumOfTowers; i++)
         {
@@ -43,7 +48,7 @@ public class Planet : MonoBehaviour
                        
                 default: break;
             }
-            Instantiate(currentPillar, this.transform.position, rot, this.transform);
+            Instantiate(currentPillar, this.transform.position + Vector3.forward, rot, this.transform);
             
         }
     }
