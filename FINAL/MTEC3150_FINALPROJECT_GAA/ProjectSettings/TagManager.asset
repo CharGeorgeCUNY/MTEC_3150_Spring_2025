@@ -6,6 +6,7 @@ TagManager:
   tags:
   - randomObject
   - Planet
+  - Border
   layers:
   - Default
   - TransparentFX
