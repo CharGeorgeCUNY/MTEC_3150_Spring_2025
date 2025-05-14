@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - start
+  - end
+  - trigger
+  - One
+  - Two
+  - Three
+  - hazardOne
+  - hazardTwo
+  - hazardThree
   layers:
   - Default
   - TransparentFX
