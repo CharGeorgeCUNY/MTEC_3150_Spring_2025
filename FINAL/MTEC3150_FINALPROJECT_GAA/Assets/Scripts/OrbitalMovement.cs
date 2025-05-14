@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+//Relatively complex script developed using quaternions to control orbit around objects stored in a listed array.
+
 public class OrbitalMovement : MonoBehaviour
 {
     public float minOrbitSpeed = 10f;
