@@ -14,30 +14,42 @@ public class PlayerMovement : MonoBehaviour
     [Header("Physics Settings")]
     [Tooltip("How quickly to bleed off speed when NOT in ball form (units/sec²)")]
     [SerializeField] float decelerationRate = 1f;
-    [Tooltip("Impulse added when you curl into ball form")]
-    [SerializeField] float ballSpeedBoost = 10f;
+
+    [Tooltip("Flat speed added when you curl into ball form")]
+    [SerializeField] float flatRollSpeedBoost = 10f;
+
+    [Tooltip("Additional speed added per second while rolling")]
+    [SerializeField] float rollAcceleration = 2f;
+
     [Tooltip("Gravity scale to use in ball form")]
     [SerializeField] float ballGravityScale = 1f;
 
+    [Tooltip("Vertical speed when in ball form")]
+    [SerializeField] float rollVerticalSpeed = 5f;
+
+    public GameManager gm;
     public Rigidbody2D rb;
     private bool isBallForm = false;
     private bool isCurling = false;
     private bool boostApplied = false;
     private Quaternion targetRotation;
-    public float CurrentSpeed => rb.velocity.x;
+
+    // tracks W/S input during ball form
+    private float verticalInput;
+
+    public float CurrentSpeedX => rb.velocity.x;
+    public float CurrentSpeedY => rb.velocity.y;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Start out kinematic with zero gravity
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 0f;
-        Debug.Log("[PlayerMovement] Start: bodyType=Dynamic, gravityScale=0");
     }
 
     void Update()
     {
-        // ——— Handle Curl / Ball Transitions ———
+        // ——— Curl / Ball transitions ———
         if (Input.GetKey(KeyCode.Space))
         {
             if (!isCurling)
@@ -46,26 +58,20 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("IsBall", false);
                 isCurling = true;
                 boostApplied = false;
-                Debug.Log("[PlayerMovement] Started Curling");
             }
 
             if (isCurling && !isBallForm)
             {
-                // switch into ball form
+                // Enter ball form
                 animator.SetBool("IsBall", true);
                 isBallForm = true;
                 targetRotation = Quaternion.identity;
-
-                // switch to dynamic physics
-                rb.bodyType = RigidbodyType2D.Dynamic;
                 rb.gravityScale = ballGravityScale;
-                Debug.Log($"[PlayerMovement] Entered Ball Form: bodyType=Dynamic, gravityScale={rb.gravityScale}");
 
                 if (!boostApplied)
                 {
-                    rb.AddForce(transform.right * ballSpeedBoost, ForceMode2D.Impulse);
+                    rb.velocity = new Vector2(rb.velocity.x + flatRollSpeedBoost, -rb.velocity.y);
                     boostApplied = true;
-                    Debug.Log($"[PlayerMovement] Applied Ball Speed Boost: {ballSpeedBoost}");
                 }
             }
         }
@@ -73,46 +79,65 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isBallForm)
             {
+                // Exit ball form
                 animator.SetTrigger("BallToCurl");
                 animator.SetBool("IsBall", false);
                 isBallForm = false;
-                targetRotation = Quaternion.Euler(0f, 0f, 0f);
-
-                // back to kinematic
-                rb.bodyType = RigidbodyType2D.Kinematic;
+                targetRotation = Quaternion.identity;
                 rb.gravityScale = 0f;
-                Debug.Log("[PlayerMovement] Exited Ball Form: bodyType=Kinematic, gravityScale=0");
+                rb.velocity = new Vector2(rb.velocity.x - flatRollSpeedBoost, rb.velocity.y);
             }
             else if (isCurling)
             {
                 animator.SetBool("IsCurling", false);
                 animator.SetBool("IsIdle", true);
                 isCurling = false;
-                Debug.Log("[PlayerMovement] Returned to Idle from Curling");
             }
         }
 
-        // ——— Handle Rotation ———
+        // ——— Rotation ———
+        if (isBallForm)
+            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        else
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, smoothRotationSpeed * Time.deltaTime);
+
+        // ——— Vertical input when rolling ———
         if (isBallForm)
         {
-            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, smoothRotationSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W)) verticalInput = 5f;
+            else if (Input.GetKey(KeyCode.S)) verticalInput = -5f;
+            else verticalInput = 0f;
         }
     }
 
     void FixedUpdate()
     {
-        // if we're kinematic (not ball form), bleed off any residual velocity
-        if (rb.bodyType == RigidbodyType2D.Kinematic)
+        if (isBallForm)
         {
+            // accelerate and override vertical movement
             Vector2 v = rb.velocity;
-            float newX = Mathf.MoveTowards(v.x, 0f, decelerationRate * Time.fixedDeltaTime);
-            rb.velocity = new Vector2(newX, v.y);
-            Debug.Log($"[PlayerMovement] Decelerating: velocity.x from {v.x:F2} to {newX:F2}");
+            v.x += rollAcceleration * Time.fixedDeltaTime;
+            v.y = verticalInput * rollVerticalSpeed;
+            rb.velocity = v;
         }
-        // Dynamic (ball form) physics run naturally
+        else
+        {
+            // bleed off residual speed normally
+            if (rb.bodyType == RigidbodyType2D.Dynamic)
+            {
+                Vector2 v = rb.velocity;
+                float newX = Mathf.MoveTowards(v.x, 0f, decelerationRate * Time.fixedDeltaTime);
+                rb.velocity = new Vector2(newX, v.y);
+            }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hazard"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

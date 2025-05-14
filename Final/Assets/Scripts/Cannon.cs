@@ -62,7 +62,7 @@ public class Cannon : MonoBehaviour
         {
             rb.velocity = transform.right * launchSpeed;
             if (zeroGravity) rb.gravityScale = 0f;
-            rb.drag = 0f; // no slowdown
+            rb.drag = 0f;
         }
 
         var camFollow = Camera.main.GetComponent<FollowCam>();
