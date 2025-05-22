@@ -656,7 +656,7 @@ PlayerSettings:
     Stadia: TITAN_EDITOR_MODE
     Standalone: TITAN_EDITOR_MODE;__MICROSPLAT__
     VisionOS: TITAN_EDITOR_MODE
-    WebGL: TITAN_EDITOR_MODE
+    WebGL: TITAN_EDITOR_MODE;__MICROSPLAT__
     XboxOne: TITAN_EDITOR_MODE
     tvOS: TITAN_EDITOR_MODE
   additionalCompilerArguments: {}

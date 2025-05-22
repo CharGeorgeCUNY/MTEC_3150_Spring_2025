@@ -10,6 +10,7 @@ public class playerMovement : MonoBehaviour
     float speedDefault = 7.0f;
     public float fullSpeedfill = 1.0f;
 
+
     //checkPoints Signs
     public GameObject checkPointOneText;
     public GameObject checkPointTwoText;
@@ -21,6 +22,7 @@ public class playerMovement : MonoBehaviour
     public Transform checkPointTwoPos;
     public Transform checkPointThreePos;
 
+   
     //reload scene, collision with startBorder
     string currentSceneName;
 
@@ -123,10 +125,8 @@ public class playerMovement : MonoBehaviour
 
     public IEnumerator theEnd()
     {
-        WaitForSeconds delay = new WaitForSeconds(1.8f);
+        WaitForSeconds delay = new WaitForSeconds(0.8f);
         theEndText.SetActive(true);
-        yield return delay;
-        theEndText.SetActive(false);
         yield return delay;
         SceneManager.LoadScene(currentSceneName);
     }
